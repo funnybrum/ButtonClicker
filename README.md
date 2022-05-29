@@ -6,6 +6,8 @@ Buttons are wired through mini SSRs (VO1400AEF) on D5, D6, D7 and D8. Scheduler 
 
 On first launch the device will create WiFi access point named "clicker". To configure the WiFi network SSID and password connect to that network and open http://192.168.0.1 . A web page will pop up and allow to specify the network access settings. Click save and reboot to complete the setup process.
 
+PCB can be found on https://oshwlab.com/funnybrum/clicker .
+
 ## Building the project
 
 The project uses a common set of tools that are availabe in another repo - https://github.com/funnybrum/esp8266-base. Clone the esp8266-base repo in the lib folder:
