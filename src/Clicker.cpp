@@ -4,8 +4,15 @@ Logger logger = Logger();
 Settings settings = Settings();
 
 WiFiManager wifi = WiFiManager(&logger, &settings.getSettings()->network);
-SystemCheck systemCheck = SystemCheck(&logger);
 WebServer webServer = WebServer(&logger, &settings.getSettings()->network);
+WiFiUDP ntpUDP;
+NTPClient ntpClient = NTPClient(ntpUDP);
+ClickCommand* clickCommands = new ClickCommand[4] {
+    ClickCommand(1, &settings.getSettings()->command1),
+    ClickCommand(2, &settings.getSettings()->command2),
+    ClickCommand(3, &settings.getSettings()->command3),
+    ClickCommand(4, &settings.getSettings()->command4)    
+};
 
 ClickManager clickManager = ClickManager(
     new ClickExecutor[4] {
@@ -14,9 +21,7 @@ ClickManager clickManager = ClickManager(
         ClickExecutor(D3),
         ClickExecutor(D4)
     },
-    new ClickCommand[1] {
-        ClickCommand(0, &settings.getSettings()->command1)
-    },
+    clickCommands,
     &settings.getSettings()->click);
 
 void setup()
@@ -28,16 +33,19 @@ void setup()
     settings.begin();
     wifi.begin();
     webServer.begin();
-    systemCheck.begin();
 
     wifi.connect();
+    ntpClient.begin();
+    clickManager.begin();
+    // Set update interval to 4 hours
+    ntpClient.setUpdateInterval(4 * 60 * 60 * 1000);
 }
 
 void loop() {
     wifi.loop();
     webServer.loop();
     settings.loop();
-    systemCheck.loop();
+    ntpClient.update();
 
     delay(100);
 }

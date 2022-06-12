@@ -9,11 +9,16 @@
 
 #include "esp8266-base.h"
 #include "ClickManager.h"
+#include "NTPClient.h"
 
 #define HTTP_PORT 80
 #define HOSTNAME "clicker"
+#define COMMANDS_COUNT 4
+#define CLICKERS_COUNT 4
 
 extern Logger logger;
 extern Settings settings;
 extern WiFiManager wifi;
-extern SystemCheck systemCheck;
+extern NTPClient ntpClient;
+extern ClickManager clickManager;
+extern ClickCommand* clickCommands;
