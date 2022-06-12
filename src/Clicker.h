@@ -8,6 +8,7 @@
 #include "user_interface.h"
 
 #include "esp8266-base.h"
+#include "ClickManager.h"
 
 #define HTTP_PORT 80
 #define HOSTNAME "clicker"

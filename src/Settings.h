@@ -2,9 +2,15 @@
 
 #include "SettingsBase.h"
 #include "WiFi.h"
+#include "ClickManager.h"
 
 struct SettingsData {
     NetworkSettings network;
+    ClickSettings click;
+    ClickCommandSettings command1;
+    ClickCommandSettings command2;
+    ClickCommandSettings command3;
+    ClickCommandSettings command4;
 };
 
 struct Empty {};

@@ -7,6 +7,18 @@ WiFiManager wifi = WiFiManager(&logger, &settings.getSettings()->network);
 SystemCheck systemCheck = SystemCheck(&logger);
 WebServer webServer = WebServer(&logger, &settings.getSettings()->network);
 
+ClickManager clickManager = ClickManager(
+    new ClickExecutor[4] {
+        ClickExecutor(D1),
+        ClickExecutor(D2),
+        ClickExecutor(D3),
+        ClickExecutor(D4)
+    },
+    new ClickCommand[1] {
+        ClickCommand(0, &settings.getSettings()->command1)
+    },
+    &settings.getSettings()->click);
+
 void setup()
 { 
     Serial.begin(74880);
