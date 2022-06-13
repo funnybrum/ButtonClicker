@@ -8,8 +8,8 @@ const char CONFIG_PAGE[] PROGMEM = R"=====(
    %s<br><br>
    %s<br><br>
    <small><em>Click commands examples:</em></small><br>
-   <small><em>0800:1p1p2222 - 8AM, click button 1, pause, click button 1, pause, click 4 times button 2</em></small><br>
-   <small><em>2200:1p3333 - 8PM, click button 1, pause, click 4 times button 3</em></small><br>
+   <small><em>"0800:1p1p2222" - 8AM, click button 1, pause, click button 1, pause, click 4 times button 2</em></small><br>
+   <small><em>"2210:1p3333" - 8:10PM, click button 1, pause, click 4 times button 3</em></small><br>
    %s<br><br>
    %s<br><br>
    %s<br><br>

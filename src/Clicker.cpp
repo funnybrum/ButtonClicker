@@ -39,6 +39,8 @@ void setup()
     clickManager.begin();
     // Set update interval to 4 hours
     ntpClient.setUpdateInterval(4 * 60 * 60 * 1000);
+    // Set the current time offset
+    ntpClient.setTimeOffset(settings.getSettings()->click.timeOffset_h * 3600);
 }
 
 void loop() {
@@ -46,6 +48,11 @@ void loop() {
     webServer.loop();
     settings.loop();
     ntpClient.update();
+    clickManager.loop();
 
     delay(100);
 }
+
+// TODO
+// default settings
+// 

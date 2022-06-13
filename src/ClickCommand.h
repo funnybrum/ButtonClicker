@@ -8,6 +8,7 @@ const char CLICK_COMMAND[] PROGMEM = R"=====(
 <legend>Click command %d</legend>
 Command:<br>
 <input type="text" name="command%d" value="%s">
+<a href="/test?cmd=%d><button type="button">Test</button></a>
 </fieldset>
 )=====";
 
@@ -22,12 +23,12 @@ class ClickCommand {
         bool shouldExec(uint8_t hour, uint8_t minute);
         void get_config_page(char* buffer); 
         void parse_config_params(WebServerBase* webServer);
-
-    private:
         int8_t getExecutionHour();
         int8_t getExecutionMinute();
 
+    // private:
+
         uint8_t _index;
         ClickCommandSettings* _command;
-        uint32_t lastExec = 0;
+        uint32_t _lastExec;
 };

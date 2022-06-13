@@ -9,6 +9,7 @@ WebServer::WebServer(Logger* logger, NetworkSettings* networkSettings)
 void WebServer::registerHandlers() {
     server->on("/", std::bind(&WebServer::handle_root, this));
     server->on("/settings", std::bind(&WebServer::handle_settings, this));
+    server->on("/test", std::bind(&WebServer::handle_test, this));
 }
 
 void WebServer::handle_root() {
@@ -52,4 +53,20 @@ void WebServer::handle_settings() {
         command2,
         command3);
     server->send(200, "text/html", buffer);
+
+    ntpClient.setTimeOffset(settings.getSettings()->click.timeOffset_h * 3600);
+}
+
+void WebServer::handle_test() {
+    int8_t command = -1;
+    if (server->args() == 1 && server->argName(0).equals("cmd")) {
+        command = atoi(server->arg(0).c_str());
+        if (1 <= command && command <= COMMANDS_COUNT) {
+            this->handle_root();
+            clickManager.execute(command-1);
+            return;
+        }
+    }
+    
+    server->send(400);
 }
