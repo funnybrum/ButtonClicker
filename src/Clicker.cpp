@@ -52,7 +52,3 @@ void loop() {
 
     delay(100);
 }
-
-// TODO
-// default settings
-// 
